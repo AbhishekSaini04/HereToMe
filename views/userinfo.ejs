@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="HereToMeLogo.ico" type="image/x-icon" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+    <div class="container">
+      <div class="main">
+        <h1>User Information</h1>
+        <table style="width: 100%; border-collapse: collapse">
+          <thead>
+            <tr>
+              <th style="text-align: left; padding: 1rem">Username</th>
+              <th style="text-align: left; padding: 1rem">Email</th>
+              <th style="text-align: left; padding: 1rem">Role</th>
+              <th style="text-align: left; padding: 1rem">Files</th>
+              <th style="text-align: left; padding: 1rem">Joined</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(user => { %>
+            <tr>
+              <td style="padding: 1rem"><%= user.username %></td>
+              <td style="padding: 1rem"><%= user.email %></td>
+              <td style="padding: 1rem"><%= user.role %></td>
+              <td style="padding: 1rem"><%= user.files.length %></td>
+              <td style="padding: 1rem">
+                <%= new Date(user.createdAt).toLocaleDateString() %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>

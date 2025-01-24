@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="shortcut icon" href="HereToMeLogo.ico" type="image/x-icon" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+
+    <div class="container">
+      <div class="main">
+        <h1 class="greeting">Welcome, <%= user.username %>! 👋</h1>
+
+        <div class="carousel">
+          <img alt="img" />
+        </div>
+
+        <div class="files-section">
+          <h2>Your Files</h2>
+          <a href="/user/upload" class="btn" style="margin-bottom: 1rem"
+            >Upload New File</a
+          >
+          <% if (files && files.length > 0) { %>
+          <ul class="file-list">
+            <% files.forEach(file => { %>
+            <li class="file-item">
+              <div>
+                <span class="file-name"><%= file.originalName %></span>
+                <span class="file-date"
+                  >Uploaded: <%= new Date(file.uploadDate).toLocaleDateString()
+                  %></span
+                >
+              </div>
+              <div>
+                <a href="/user/delete/<%= file._id %>" class="btnRed">Delete</a>
+              </div>
+              <div>
+                <a href="/user/download/<%= file._id %>" class="btn"
+                  >Download</a
+                >
+              </div>
+            </li>
+            <% }) %>
+          </ul>
+          <% } else { %>
+          <p>
+            No files uploaded yet.
+            <a href="/user/upload">Upload your first file</a>
+          </p>
+          <% } %>
+        </div>
+
+        <div class="joke-section">
+          <h2>Random Programming Joke</h2>
+          <p id="joke">Loading joke...</p>
+        </div>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>
+
+    <script>
+      // Fetch random programming joke
+      fetch("https://v2.jokeapi.dev/joke/Programming?safe-mode")
+        .then((response) => response.json())
+        .then((data) => {
+          const jokeElement = document.getElementById("joke");
+          if (data.type === "single") {
+            jokeElement.textContent = data.joke;
+          } else {
+            jokeElement.textContent = `${data.setup} ... ${data.delivery}`;
+          }
+        })
+        .catch(() => {
+          document.getElementById("joke").textContent =
+            "Why do programmers prefer dark mode? Because light attracts bugs! 🐛";
+        });
+    </script>
+  </body>
+</html>

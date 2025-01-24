@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="navbar-content">
+    <div>
+      <a href="/">Home</a>
+      <a href="/user/upload">Upload</a>
+      <% if (locals.user?.role === 'admin') { %>
+      <a href="/user/getinfo">User Info</a>
+      <% } %>
+    </div>
+    <div>
+      <span style="color: white; margin-right: 1rem"
+        ><%= locals.user?.username %></span
+      >
+      <a href="/user/logout">Logout</a>
+    </div>
+  </div>
+</nav>

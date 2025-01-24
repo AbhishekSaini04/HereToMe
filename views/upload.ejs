@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="HereToMeLogo.ico" type="image/x-icon" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <%- include('partials/navbar') %>
+
+    <div class="container">
+      <div class="form-container">
+        <h1>Upload File</h1>
+        <form action="/user/upload" method="POST" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="file">Choose File</label>
+            <input type="file" id="file" name="file" required />
+          </div>
+          <button type="submit" class="btn">Upload</button>
+        </form>
+      </div>
+    </div>
+
+    <%- include('partials/footer') %>
+  </body>
+</html>
